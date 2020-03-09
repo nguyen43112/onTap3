@@ -6,6 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface JsonPlaceHolderApi {
-    @GET("todos")
+    @GET("/todos")
     Call<List<post>> getPost();
 }

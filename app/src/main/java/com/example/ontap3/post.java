@@ -8,9 +8,8 @@ public class post {
     private int userId;
     private  int  id;
     private String title;
-    private String completed;
+    private Boolean completed;
     @SerializedName("body")
-    private String text;
 
     public int getUserId() {
         return userId;
@@ -24,11 +23,8 @@ public class post {
         return title;
     }
 
-    public String getCompleted() {
+    public Boolean getCompleted() {
         return completed;
     }
 
-    public String getText() {
-        return text;
-    }
 }

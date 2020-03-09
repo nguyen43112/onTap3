@@ -17,9 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rvList ;
-    private List<post> Postlist;
-    private PostAdapter PostAdapter;
-    ArrayList<post> posts = new ArrayList<>();
+    private PostAdapter postAdapter;
+   List<post> posts = new ArrayList<>();
 
 
     @Override
@@ -31,10 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         rvList.setHasFixedSize(true);
-        PostAdapter = new PostAdapter(Postlist);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
-        rvList.setLayoutManager(linearLayoutManager);
-        rvList.setAdapter(PostAdapter);
 
 
         //Retrofit
@@ -47,7 +42,12 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<post>>() {
             @Override
             public void onResponse(Call<List<post>> call, Response<List<post>> response) {
-                posts = new ArrayList<>(response.body());
+                posts.addAll(response.body());
+                postAdapter = new PostAdapter(MainActivity.this,posts);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
+                rvList.setLayoutManager(linearLayoutManager);
+                rvList.setAdapter(postAdapter);
+
 
             }
 
